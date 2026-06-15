@@ -1,0 +1,213 @@
+.signup-page {
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at 18% 18%, rgba(43, 196, 255, 0.22), transparent 28rem),
+        radial-gradient(circle at 82% 12%, rgba(72, 255, 176, 0.16), transparent 24rem),
+        linear-gradient(135deg, var(--app-bg-deep) 0%, var(--app-bg) 44%, var(--app-surface) 100%);
+}
+
+.signup-nav {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(10, 15, 24, 0.76);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+}
+
+.signup-stage {
+    min-height: calc(100vh - 58px);
+    display: flex;
+    align-items: center;
+    padding: 3rem 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.signup-stage::before {
+    content: "";
+    position: absolute;
+    inset: 8% auto auto 52%;
+    width: min(42vw, 34rem);
+    aspect-ratio: 1;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 999px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.02));
+    transform: rotate(18deg);
+    pointer-events: none;
+}
+
+.signup-copy {
+    max-width: 38rem;
+    position: relative;
+    z-index: 1;
+}
+
+.signup-kicker,
+.signup-panel-label {
+    font-size: 0.78rem;
+    font-weight: 800;
+}
+
+.signup-copy h1 {
+    max-width: 11ch;
+    margin: 0.45rem 0 1rem;
+    color: var(--app-text-strong);
+    font-size: clamp(3rem, 8vw, 5.8rem);
+    font-weight: 800;
+    line-height: 0.96;
+    letter-spacing: 0;
+}
+
+.signup-copy p {
+    max-width: 34rem;
+    color: #c5ccdc;
+    font-size: 1.08rem;
+    line-height: 1.65;
+}
+
+.signup-highlights {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+}
+
+.signup-highlights span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    min-height: 2.4rem;
+    padding: 0.48rem 0.75rem;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: var(--app-radius);
+    background: rgba(255, 255, 255, 0.07);
+    color: #eef3ff;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+}
+
+.signup-highlights i {
+    color: var(--app-accent);
+}
+
+.signup-glass-panel {
+    position: relative;
+    z-index: 1;
+    padding: 1.5rem;
+}
+
+.signup-emblem {
+    width: 3rem;
+    height: 3rem;
+    display: grid;
+    place-items: center;
+    border-radius: var(--app-radius);
+    background: var(--app-gradient);
+    color: #07101a;
+    font-size: 1.35rem;
+    box-shadow: 0 12px 28px rgba(43, 196, 255, 0.28);
+}
+
+.signup-glass-panel .form-label {
+    color: var(--app-text-soft);
+    font-size: 0.86rem;
+    font-weight: 700;
+}
+
+.signup-control {
+    min-height: 3rem;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: var(--app-radius);
+    background: var(--app-input-bg);
+    color: var(--app-text-strong);
+}
+
+.signup-control::placeholder {
+    color: var(--app-muted-dark);
+}
+
+.signup-control:focus {
+    border-color: rgba(43, 196, 255, 0.82);
+    background: var(--app-input-bg-focus);
+    color: var(--app-text-strong);
+    box-shadow: 0 0 0 0.22rem rgba(43, 196, 255, 0.17);
+}
+
+.signup-password-toggle {
+    top: 2.25rem;
+    color: var(--app-muted);
+    z-index: 5;
+}
+
+.signup-password-toggle:hover,
+.signup-password-toggle:focus {
+    color: var(--app-accent);
+}
+
+.signup-strength-track {
+    height: 0.3rem;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.password-strength-bar {
+    width: 0%;
+    height: 100%;
+    border-radius: inherit;
+    background: var(--app-danger);
+    transition: width 160ms ease, background-color 160ms ease;
+}
+
+.signup-strength-label {
+    min-height: 1.25rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+.signup-message {
+    min-height: 1.25rem;
+    font-weight: 700;
+}
+
+.signup-submit {
+    min-height: 3rem;
+    box-shadow: 0 14px 28px rgba(43, 196, 255, 0.22);
+}
+
+.signup-submit:disabled {
+    opacity: 0.7;
+}
+
+.signup-alt {
+    color: var(--app-muted);
+}
+
+.signup-alt a {
+    color: var(--app-accent);
+    font-weight: 700;
+}
+
+@media (max-width: 991.98px) {
+    .signup-stage {
+        align-items: flex-start;
+        padding: 2rem 0;
+    }
+
+    .signup-copy h1 {
+        max-width: 14ch;
+        font-size: 3.3rem;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .signup-glass-panel {
+        padding: 1rem;
+    }
+
+    .signup-copy h1 {
+        font-size: 2.7rem;
+    }
+
+    .signup-highlights {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+}

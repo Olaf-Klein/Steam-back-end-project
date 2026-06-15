@@ -1,0 +1,85 @@
+:root {
+    --app-bg: #10141f;
+    --app-bg-deep: #0b101a;
+    --app-surface: #1b2233;
+    --app-surface-soft: rgba(255, 255, 255, 0.06);
+    --app-surface-hover: rgba(255, 255, 255, 0.08);
+    --app-input-bg: rgba(8, 12, 20, 0.48);
+    --app-input-bg-focus: rgba(8, 12, 20, 0.66);
+    --app-text: #f8f9fa;
+    --app-text-strong: #ffffff;
+    --app-text-soft: #dfe7f7;
+    --app-muted: #aab2c5;
+    --app-muted-dark: #8390a8;
+    --app-accent: #2bc4ff;
+    --app-accent-2: #45f882;
+    --app-accent-3: #48ffb0;
+    --app-danger: #ff5c7a;
+    --app-warning: #ff9f43;
+    --app-radius: 8px;
+    --app-border: rgba(255, 255, 255, 0.12);
+    --app-border-strong: rgba(255, 255, 255, 0.18);
+    --app-gradient: linear-gradient(135deg, var(--app-accent), var(--app-accent-2));
+    --app-page-bg: linear-gradient(135deg, var(--app-bg-deep) 0%, var(--app-bg) 48%, var(--app-surface) 100%);
+    --app-shadow: 0 24px 70px rgba(0, 0, 0, 0.38);
+}
+
+body {
+    margin: 0;
+    background: var(--app-bg);
+    color: var(--app-text);
+}
+
+.app-glass {
+    border: 1px solid var(--app-border-strong);
+    border-radius: var(--app-radius);
+    background:
+        linear-gradient(145deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.06)),
+        rgba(16, 20, 31, 0.72);
+    box-shadow: var(--app-shadow), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(24px) saturate(145%);
+    -webkit-backdrop-filter: blur(24px) saturate(145%);
+}
+
+.app-panel {
+    border: 1px solid var(--app-border);
+    border-radius: var(--app-radius);
+    background: var(--app-surface-soft);
+}
+
+.app-gradient-button {
+    border: 0;
+    border-radius: var(--app-radius);
+    background: var(--app-gradient);
+    color: #07101a;
+    font-weight: 800;
+}
+
+.app-gradient-button:hover,
+.app-gradient-button:focus {
+    color: #07101a;
+    filter: brightness(1.06);
+}
+
+.app-secondary-button {
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: var(--app-radius);
+    background: var(--app-surface-hover);
+    color: var(--app-text-strong);
+    font-weight: 800;
+}
+
+.app-secondary-button:hover,
+.app-secondary-button:focus {
+    border-color: rgba(43, 196, 255, 0.34);
+    background: rgba(255, 255, 255, 0.12);
+    color: var(--app-text-strong);
+}
+
+.app-kicker {
+    color: var(--app-accent-3);
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0;
+    text-transform: uppercase;
+}
