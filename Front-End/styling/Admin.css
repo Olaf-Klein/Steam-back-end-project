@@ -1,0 +1,95 @@
+.admin-page {
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at 82% 8%, rgba(43, 196, 255, 0.16), transparent 24rem),
+        var(--app-page-bg);
+}
+
+.admin-header {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--app-border);
+}
+
+.admin-grid {
+    display: grid;
+    gap: 1rem;
+}
+
+.admin-player {
+    padding: 1rem;
+}
+
+.admin-player-header {
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.admin-player-header h2 {
+    color: var(--app-text-strong);
+    font-weight: 800;
+}
+
+.admin-player-header p,
+.admin-player-header span,
+.admin-empty {
+    color: var(--app-muted);
+}
+
+.admin-library-list {
+    display: grid;
+    gap: 0.65rem;
+}
+
+.admin-library-item {
+    display: grid;
+    grid-template-columns: 2.4rem 1fr auto;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.55rem;
+    border: 1px solid var(--app-border);
+    border-radius: var(--app-radius);
+    background: var(--app-surface-soft);
+}
+
+.admin-library-item img {
+    width: 2.4rem;
+    height: 3.6rem;
+    object-fit: cover;
+    border-radius: 6px;
+    background: var(--app-surface);
+}
+
+.admin-library-item strong,
+.admin-library-item span {
+    display: block;
+}
+
+.admin-library-item strong {
+    color: var(--app-text-strong);
+}
+
+.admin-library-item span {
+    color: var(--app-muted);
+    font-size: 0.85rem;
+}
+
+.admin-remove-button {
+    border: 1px solid rgba(255, 92, 122, 0.35);
+    border-radius: var(--app-radius);
+    background: rgba(255, 92, 122, 0.12);
+    color: var(--app-danger);
+}
+
+.admin-remove-button:hover,
+.admin-remove-button:focus {
+    background: rgba(255, 92, 122, 0.2);
+    color: var(--app-danger);
+}

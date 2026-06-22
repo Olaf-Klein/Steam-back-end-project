@@ -7,7 +7,7 @@ session_start();
 require_once __DIR__ . "/DB_access.php";
 
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
-    redirectWithMessage("../Front-End/login.php", "Please submit the form first.", "danger");
+    redirectWithMessage("../Front-End/Login.php", "Please submit the form first.", "danger");
 }
 
 $action = $_POST["action"] ?? "";
@@ -20,7 +20,7 @@ if ($action === "login") {
     loginUser($pdo);
 }
 
-redirectWithMessage("../Front-End/login.php", "Unknown authentication action.", "danger");
+redirectWithMessage("../Front-End/Login.php", "Unknown authentication action.", "danger");
 
 function registerUser(PDO $pdo): void
 {
@@ -58,7 +58,7 @@ function registerUser(PDO $pdo): void
         "password" => password_hash($password, PASSWORD_DEFAULT),
     ]);
 
-    redirectWithMessage("../Front-End/login.php", "Account created. You can sign in now.", "success");
+    redirectWithMessage("../Front-End/Login.php", "Account created. You can sign in now.", "success");
 }
 
 function loginUser(PDO $pdo): void
@@ -67,17 +67,20 @@ function loginUser(PDO $pdo): void
     $password = $_POST["password"] ?? "";
 
     if ($username === "" || $password === "") {
-        redirectWithMessage("../Front-End/login.php", "Enter your username and password.", "danger");
+        redirectWithMessage("../Front-End/Login.php", "Enter your username and password.", "danger");
     }
 
     $statement = $pdo->prepare(
-        "SELECT id, username, email, password, IsAdmin FROM users WHERE username = :username LIMIT 1"
+        "SELECT id, username, email, password, IsAdmin
+         FROM users
+         WHERE username = :login OR email = :login
+         LIMIT 1"
     );
-    $statement->execute(["username" => $username]);
+    $statement->execute(["login" => $username]);
     $user = $statement->fetch();
 
     if (!$user || !password_verify($password, $user["password"])) {
-        redirectWithMessage("../Front-End/login.php", "Invalid username or password.", "danger");
+        redirectWithMessage("../Front-End/Login.php", "Invalid username/email or password.", "danger");
     }
 
     session_regenerate_id(true);

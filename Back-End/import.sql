@@ -4,6 +4,7 @@ USE backend_eindproject;
 DROP TABLE IF EXISTS order_items;
 DROP TABLE IF EXISTS orders;
 DROP TABLE IF EXISTS cart;
+DROP TABLE IF EXISTS player_libraries;
 DROP TABLE IF EXISTS games;
 DROP TABLE IF EXISTS users;
 
@@ -28,6 +29,16 @@ CREATE TABLE cart (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
     game_id INT NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (game_id) REFERENCES games(id) ON DELETE CASCADE
+);
+
+CREATE TABLE player_libraries (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    game_id INT NOT NULL,
+    added_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE KEY unique_user_game (user_id, game_id),
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
     FOREIGN KEY (game_id) REFERENCES games(id) ON DELETE CASCADE
 );
@@ -69,3 +80,6 @@ INSERT INTO orders (user_id) VALUES
 
 INSERT INTO order_items (order_id, game_id, price_at_purchase) VALUES
 (1, 3, 13.99);
+
+INSERT INTO player_libraries (user_id, game_id) VALUES
+(2, 3);

@@ -1,10 +1,21 @@
 <?php
+session_start();
+
 require_once __DIR__ . "/../Back-End/StoreLogic.php";
 
 function e(?string $value): string
 {
     return htmlspecialchars($value ?? "", ENT_QUOTES, "UTF-8");
 }
+
+function formatPrice(float $price): string
+{
+    return $price <= 0 ? "Free" : "&euro;" . e(number_format($price, 2));
+}
+
+$flashMessage = $_SESSION["flash_message"] ?? "";
+$flashType = $_SESSION["flash_type"] ?? "info";
+unset($_SESSION["flash_message"], $_SESSION["flash_type"]);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,6 +25,7 @@ function e(?string $value): string
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Store</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="styling/Global.css">
     <link rel="stylesheet" href="styling/Store.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
@@ -39,9 +51,13 @@ function e(?string $value): string
                         <a class="nav-link" href="Library.php"><i class="bi bi-collection me-1"></i>Library</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="login.php"><i class="bi bi-box-arrow-in-right me-1"></i>Login</a>
+                        <a class="nav-link" href="Login.php"><i class="bi bi-box-arrow-in-right me-1"></i>Login</a>
                     </li>
                 </ul>
+                <button class="btn app-secondary-button ms-lg-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartSidebar" aria-controls="cartSidebar">
+                    <i class="bi bi-cart3 me-1"></i>Cart
+                    <span class="badge text-bg-info ms-1"><?= count($cartGames) ?></span>
+                </button>
             </div>
         </div>
     </nav>
@@ -52,6 +68,12 @@ function e(?string $value): string
                 <p class="text-secondary mb-0">Browse the latest games.</p>
             </div>
         </div>
+
+        <?php if ($flashMessage !== ""): ?>
+            <div class="alert alert-<?= e($flashType) ?> py-2" role="alert">
+                <?= e($flashMessage) ?>
+            </div>
+        <?php endif; ?>
 
         <?php if (empty($games)): ?>
             <div class="alert alert-dark border-secondary" role="alert">
@@ -82,8 +104,15 @@ function e(?string $value): string
                                 <p class="game-description text-secondary mt-2 mb-0"><?= e($game["description"]) ?></p>
                                 <div class="d-flex align-items-center justify-content-between gap-2 mt-3">
                                     <span class="text-secondary small"><?= e($game["genre"]) ?></span>
-                                    <strong class="game-price"><?= ((float) $game["price"] <= 0) ? "Free" : "&euro;" . e(number_format((float) $game["price"], 2)) ?></strong>
+                                    <strong class="game-price"><?= formatPrice((float) $game["price"]) ?></strong>
                                 </div>
+                                <form action="../Back-End/Checkout.php" method="post" class="mt-3">
+                                    <input type="hidden" name="action" value="add_to_cart">
+                                    <input type="hidden" name="game_id" value="<?= (int) $game["id"] ?>">
+                                    <button type="submit" class="btn app-secondary-button add-cart-button w-100">
+                                        <i class="bi bi-cart-plus me-1"></i>In winkelwagen
+                                    </button>
+                                </form>
                             </div>
                         </article>
                     </div>
@@ -93,6 +122,54 @@ function e(?string $value): string
             </div>
         <?php endif; ?>
     </main>
+
+    <aside class="offcanvas offcanvas-end cart-offcanvas" tabindex="-1" id="cartSidebar" aria-labelledby="cartSidebarLabel">
+        <div class="offcanvas-header">
+            <div>
+                <p class="app-kicker mb-1">Winkelwagen</p>
+                <h2 class="offcanvas-title h5" id="cartSidebarLabel"><?= count($cartGames) ?> game<?= count($cartGames) === 1 ? "" : "s" ?></h2>
+            </div>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <?php if (empty($cartGames)): ?>
+                <div class="cart-empty app-panel">
+                    <i class="bi bi-cart3"></i>
+                    <p class="mb-0">Je winkelwagen is leeg.</p>
+                </div>
+            <?php else: ?>
+                <div class="cart-items">
+                    <?php foreach ($cartGames as $cartGame): ?>
+                        <?php $cartCover = $cartGame["image"] ?: "https://placehold.co/160x240/1b2233/ffffff?text=Game"; ?>
+                        <div class="cart-item">
+                            <img
+                                src="<?= e($cartCover) ?>"
+                                class="cart-cover"
+                                alt="<?= e($cartGame["title"]) ?> cover"
+                                width="36"
+                                height="54"
+                                loading="lazy">
+                            <div>
+                                <strong><?= e($cartGame["title"]) ?></strong>
+                                <span><?= formatPrice((float) $cartGame["price"]) ?></span>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Totaal</span>
+                <strong><?= formatPrice($cartTotal) ?></strong>
+            </div>
+            <form action="Checkout.php" method="post">
+                <button type="submit" class="btn app-gradient-button checkout-button w-100" <?= empty($cartGames) ? "disabled" : "" ?>>
+                    <i class="bi bi-credit-card me-1"></i>Afrekenen
+                </button>
+            </form>
+        </div>
+    </aside>
 
 </body>
 

@@ -95,7 +95,7 @@ unset($_SESSION["flash_message"], $_SESSION["flash_type"]);
                         </form>
 
                         <div class="mt-3 text-center signup-alt">
-                            <span>Already have an account? <a href="login.php">Login</a></span>
+                            <span>Already have an account? <a href="Login.php">Login</a></span>
                         </div>
                     </div>
                 </div>

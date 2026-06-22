@@ -9,6 +9,9 @@ function e(?string $value): string
 
 $userId = isset($_SESSION["user_id"]) ? (int) $_SESSION["user_id"] : null;
 $username = $_SESSION["username"] ?? "Player";
+$flashMessage = $_SESSION["flash_message"] ?? "";
+$flashType = $_SESSION["flash_type"] ?? "info";
+unset($_SESSION["flash_message"], $_SESSION["flash_type"]);
 $libraryGames = getLibraryGames($pdo, $userId);
 $selectedId = isset($_GET["game_id"]) ? (int) $_GET["game_id"] : null;
 $selectedGame = getSelectedLibraryGame($libraryGames, $selectedId);
@@ -30,7 +33,7 @@ $selectedGame = getSelectedLibraryGame($libraryGames, $selectedId);
 <body class="library-page">
     <nav class="navbar navbar-expand-lg navbar-dark signup-nav">
         <div class="container-lg">
-            
+
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
                 aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -44,7 +47,7 @@ $selectedGame = getSelectedLibraryGame($libraryGames, $selectedId);
                         <a class="nav-link" href="Library.php"><i class="bi bi-collection me-1"></i>Library</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="login.php"><i class="bi bi-box-arrow-in-right me-1"></i>Login</a>
+                        <a class="nav-link" href="Login.php"><i class="bi bi-box-arrow-in-right me-1"></i>Login</a>
                     </li>
                 </ul>
             </div>
@@ -96,6 +99,12 @@ $selectedGame = getSelectedLibraryGame($libraryGames, $selectedId);
                     <h1 class="h3 mb-0">Your games</h1>
                 </div>
             </header>
+
+            <?php if ($flashMessage !== ""): ?>
+                <div class="alert alert-<?= e($flashType) ?> py-2" role="alert">
+                    <?= e($flashMessage) ?>
+                </div>
+            <?php endif; ?>
 
             <?php if ($selectedGame === null): ?>
                 <section class="library-empty app-panel">

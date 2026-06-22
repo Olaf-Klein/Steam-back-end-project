@@ -21,6 +21,109 @@ body {
     color: var(--app-muted) !important;
 }
 
+.checkout-button,
+.add-cart-button {
+    min-height: 2.6rem;
+}
+
+.cart-offcanvas {
+    border-left: 1px solid var(--app-border);
+    background:
+        linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03)),
+        rgba(10, 15, 24, 0.96);
+    color: var(--app-text);
+}
+
+.cart-offcanvas .offcanvas-header {
+    border-bottom: 1px solid var(--app-border);
+}
+
+.cart-offcanvas .offcanvas-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.cart-items {
+    display: grid;
+    gap: 0.75rem;
+}
+
+.cart-offcanvas .cart-item {
+    display: grid;
+    grid-template-columns: 2.25rem 1fr;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.5rem;
+    border: 1px solid var(--app-border);
+    border-radius: var(--app-radius);
+    background: var(--app-surface-soft);
+}
+
+.cart-offcanvas .cart-item .cart-cover {
+    width: 2.25rem !important;
+    height: 3.35rem !important;
+    max-width: 2.25rem;
+    max-height: 3.35rem;
+    object-fit: cover;
+    display: block;
+    flex: 0 0 auto;
+    border-radius: 6px;
+    background: var(--app-surface);
+}
+
+.cart-offcanvas .cart-item strong,
+.cart-offcanvas .cart-item span {
+    display: block;
+}
+
+.cart-offcanvas .cart-item strong {
+    color: var(--app-text-strong);
+    font-size: 0.95rem;
+    line-height: 1.2;
+}
+
+.cart-offcanvas .cart-item span {
+    color: var(--app-accent-2);
+    font-weight: 800;
+}
+
+.cart-empty {
+    display: grid;
+    place-items: center;
+    gap: 0.75rem;
+    padding: 1.5rem;
+    color: var(--app-muted);
+    text-align: center;
+}
+
+.cart-empty i {
+    color: var(--app-accent);
+    font-size: 2rem;
+}
+
+.cart-footer {
+    display: grid;
+    gap: 1rem;
+    padding: 1rem;
+    border-top: 1px solid var(--app-border);
+}
+
+.cart-total {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.cart-total span {
+    color: var(--app-muted);
+}
+
+.cart-total strong {
+    color: var(--app-text-strong);
+    font-size: 1.2rem;
+}
+
 .game-card {
     position: relative;
     overflow: hidden;

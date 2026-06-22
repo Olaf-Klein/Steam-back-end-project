@@ -38,7 +38,7 @@ unset($_SESSION["flash_message"], $_SESSION["flash_type"]);
                         <a class="nav-link" href="Library.php"><i class="bi bi-collection me-1"></i>Library</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="login.php"><i class="bi bi-box-arrow-in-right me-1"></i>Login</a>
+                        <a class="nav-link" href="Login.php"><i class="bi bi-box-arrow-in-right me-1"></i>Login</a>
                     </li>
                 </ul>
             </div>
@@ -84,9 +84,9 @@ unset($_SESSION["flash_message"], $_SESSION["flash_type"]);
                         <form id="loginForm" action="../Back-End/Auth.php" method="post" autocomplete="on">
                             <input type="hidden" name="action" value="login">
                             <div class="mb-3">
-                                <label class="form-label" for="username">Username</label>
+                                <label class="form-label" for="username">Username or email</label>
                                 <input type="text" class="form-control signup-control" id="username" name="username"
-                                    placeholder="Username" autocomplete="username" minlength="3" required>
+                                    placeholder="Username or email" autocomplete="username" minlength="3" required>
                             </div>
                             <div class="mb-1 position-relative">
                                 <label class="form-label" for="password">Password</label>
@@ -104,7 +104,7 @@ unset($_SESSION["flash_message"], $_SESSION["flash_type"]);
                         </form>
 
                         <div class="mt-3 text-center signup-alt">
-                            <span>Already have an account? <a href="login.php">Login</a></span>
+                            <span>Don't have an account yet? <a href="Sign-up.php">Sign up</a></span>
                         </div>
                     </div>
                 </div>

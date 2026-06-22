@@ -33,6 +33,35 @@ function getStoreGames(PDO $pdo): array
     return $statement->fetchAll();
 }
 
+function getCartGames(PDO $pdo, ?int $userId): array
+{
+    if ($userId === null) {
+        return [];
+    }
+
+    $statement = $pdo->prepare(
+        "SELECT g.id, g.title, g.price, g.image
+         FROM cart c
+         INNER JOIN games g ON g.id = c.game_id
+         WHERE c.user_id = :user_id
+         ORDER BY g.title ASC"
+    );
+    $statement->execute(["user_id" => $userId]);
+
+    return $statement->fetchAll();
+}
+
+function getCartTotal(array $cartGames): float
+{
+    $total = 0.0;
+
+    foreach ($cartGames as $game) {
+        $total += (float) $game["price"];
+    }
+
+    return $total;
+}
+
 function getTableColumns(PDO $pdo, string $tableName): array
 {
     if (!preg_match("/^[a-zA-Z0-9_]+$/", $tableName)) {
@@ -45,4 +74,7 @@ function getTableColumns(PDO $pdo, string $tableName): array
     return array_column($statement->fetchAll(), "Field");
 }
 
+$currentUserId = $_SESSION["user_id"] ?? null;
 $games = getStoreGames($pdo);
+$cartGames = getCartGames($pdo, $currentUserId !== null ? (int) $currentUserId : null);
+$cartTotal = getCartTotal($cartGames);
