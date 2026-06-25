@@ -8,7 +8,6 @@ function e(?string $value): string
 }
 
 $userId = isset($_SESSION["user_id"]) ? (int) $_SESSION["user_id"] : null;
-$username = $_SESSION["username"] ?? "Player";
 $flashMessage = $_SESSION["flash_message"] ?? "";
 $flashType = $_SESSION["flash_type"] ?? "info";
 unset($_SESSION["flash_message"], $_SESSION["flash_type"]);
@@ -31,34 +30,9 @@ $selectedGame = getSelectedLibraryGame($libraryGames, $selectedId);
 </head>
 
 <body class="library-page">
-    <nav class="navbar navbar-expand-lg navbar-dark signup-nav">
-        <div class="container-lg">
-
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
-                aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarContent">
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link" href="Store.php"><i class="bi bi-grid me-1"></i>Store</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="Library.php"><i class="bi bi-collection me-1"></i>Library</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="Login.php"><i class="bi bi-box-arrow-in-right me-1"></i>Login</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <?php require __DIR__ . "/Partials/Navbar.php"; ?>
     <div class="library-shell">
         <aside class="library-sidebar">
-            <a class="sidebar-brand" href="Store.php">
-                <i class="bi bi-controller"></i>
-                <span>A Store</span>
-            </a>
             <div class="sidebar-games">
                 <p class="sidebar-label app-kicker">Games</p>
 
@@ -79,16 +53,6 @@ $selectedGame = getSelectedLibraryGame($libraryGames, $selectedId);
                         </a>
                     <?php endforeach; ?>
                 <?php endif; ?>
-            </div>
-
-            <div class="sidebar-user">
-                <div class="sidebar-avatar">
-                    <i class="bi bi-person-fill"></i>
-                </div>
-                <div>
-                    <strong><?= e($username) ?></strong>
-                    <span>Online</span>
-                </div>
             </div>
         </aside>
 

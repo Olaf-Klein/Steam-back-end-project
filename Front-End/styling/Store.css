@@ -6,6 +6,11 @@ body {
         var(--app-page-bg);
 }
 
+main {
+    position: relative;
+    z-index: 1;
+}
+
 .store-header {
     border-bottom: 1px solid var(--app-border);
 }
@@ -174,6 +179,15 @@ body {
 .game-price {
     color: var(--app-accent-2);
     font-size: 1rem;
+}
+
+.game-price em {
+    display: block;
+    color: var(--app-accent-3);
+    font-size: 0.72rem;
+    font-style: normal;
+    font-weight: 800;
+    line-height: 1.1;
 }
 
 .release-badge {

@@ -20,30 +20,7 @@ unset($_SESSION["flash_message"], $_SESSION["flash_type"]);
 </head>
 
 <body class="signup-page">
-    <nav class="navbar navbar-expand-lg navbar-dark signup-nav">
-        <div class="container-lg">
-            <a class="navbar-brand fw-bold" href="Store.php">
-                <i class="bi bi-controller me-2 text-info"></i>A Store
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
-                aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarContent">
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link" href="Store.php"><i class="bi bi-grid me-1"></i>Store</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="Library.php"><i class="bi bi-collection me-1"></i>Library</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="Login.php"><i class="bi bi-box-arrow-in-right me-1"></i>Login</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <?php require __DIR__ . "/Partials/Navbar.php"; ?>
 
     <main class="signup-stage">
         <section class="container-lg">

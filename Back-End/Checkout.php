@@ -6,15 +6,17 @@ session_start();
 
 require_once __DIR__ . "/DB_access.php";
 require_once __DIR__ . "/LibraryLogic.php";
+require_once __DIR__ . "/StoreLogic.php";
 
 ensurePlayerLibrariesTable($pdo);
+ensureStoreGameColumns($pdo);
 
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
-    redirectWithMessage("../Front-End/Store.php", "Ongeldige checkout actie.", "danger");
+    redirectWithMessage("../Front-End/Store.php", "Invalid checkout action.", "danger");
 }
 
 if (!isset($_SESSION["user_id"])) {
-    redirectWithMessage("../Front-End/Login.php", "Log eerst in om games te kopen.", "danger");
+    redirectWithMessage("../Front-End/Login.php", "Please log in before buying games.", "danger");
 }
 
 $userId = (int) $_SESSION["user_id"];
@@ -25,28 +27,28 @@ if ($action === "add_to_cart") {
 }
 
 if ($action === "checkout") {
-    $_SESSION["flash_message"] = "Open je winkelwagen om af te rekenen.";
+    $_SESSION["flash_message"] = "Open your cart to checkout.";
     $_SESSION["flash_type"] = "info";
     header("Location: ../Front-End/Checkout.php");
     exit;
 }
 
-redirectWithMessage("../Front-End/Store.php", "Onbekende checkout actie.", "danger");
+redirectWithMessage("../Front-End/Store.php", "Unknown checkout action.", "danger");
 
 function addToCart(PDO $pdo, int $userId): void
 {
     $gameId = (int) ($_POST["game_id"] ?? 0);
 
     if ($gameId <= 0 || !gameExists($pdo, $gameId)) {
-        redirectWithMessage("../Front-End/Store.php", "Game niet gevonden.", "danger");
+        redirectWithMessage("../Front-End/Store.php", "Game not found.", "danger");
     }
 
     if (userOwnsGame($pdo, $userId, $gameId)) {
-        redirectWithMessage("../Front-End/Store.php", "Deze game staat al in je bibliotheek.", "info");
+        redirectWithMessage("../Front-End/Store.php", "This game is already in your library.", "info");
     }
 
     if (gameIsInCart($pdo, $userId, $gameId)) {
-        redirectWithMessage("../Front-End/Store.php", "Deze game staat al in je winkelwagen.", "info");
+        redirectWithMessage("../Front-End/Store.php", "This game is already in your cart.", "info");
     }
 
     $statement = $pdo->prepare(
@@ -57,12 +59,12 @@ function addToCart(PDO $pdo, int $userId): void
         "game_id" => $gameId,
     ]);
 
-    redirectWithMessage("../Front-End/Store.php", "Game toegevoegd aan je winkelwagen.", "success");
+    redirectWithMessage("../Front-End/Store.php", "Game added to your cart.", "success");
 }
 
 function gameExists(PDO $pdo, int $gameId): bool
 {
-    $statement = $pdo->prepare("SELECT id FROM games WHERE id = :game_id LIMIT 1");
+    $statement = $pdo->prepare("SELECT id FROM games WHERE id = :game_id AND is_active = TRUE LIMIT 1");
     $statement->execute(["game_id" => $gameId]);
 
     return (bool) $statement->fetch();

@@ -20,6 +20,7 @@ unset($_SESSION["flash_message"], $_SESSION["flash_type"]);
 </head>
 
 <body class="signup-page">
+    <?php require __DIR__ . "/Partials/Navbar.php"; ?>
     <main class="signup-stage">
         <section class="container-lg">
             <div class="row align-items-center justify-content-between g-4 g-lg-5">

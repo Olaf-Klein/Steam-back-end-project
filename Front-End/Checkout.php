@@ -8,11 +8,11 @@ require_once __DIR__ . "/../Back-End/DB_access.php";
 require_once __DIR__ . "/../Back-End/CheckoutLogic.php";
 
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
-    redirectWithMessage("Store.php", "Open je winkelwagen om af te rekenen.", "info");
+    redirectWithMessage("Store.php", "Open your cart to checkout.", "info");
 }
 
 if (!isset($_SESSION["user_id"])) {
-    redirectWithMessage("Login.php", "Log eerst in om af te rekenen.", "danger");
+    redirectWithMessage("Login.php", "Please log in before checking out.", "danger");
 }
 
 checkoutCart($pdo, (int) $_SESSION["user_id"]);

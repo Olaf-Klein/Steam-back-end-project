@@ -1,14 +1,17 @@
 <?php
 
+require_once __DIR__ . "/StoreLogic.php";
+
 function checkoutCart(PDO $pdo, int $userId): void
 {
     ensurePlayerLibrariesTable($pdo);
+    ensureStoreGameColumns($pdo);
 
     try {
         $pdo->beginTransaction();
 
         $cartStatement = $pdo->prepare(
-            "SELECT DISTINCT g.id, g.price
+            "SELECT DISTINCT g.id, g.price, g.sale_price
              FROM cart c
              INNER JOIN games g ON g.id = c.game_id
              WHERE c.user_id = :user_id
@@ -19,7 +22,7 @@ function checkoutCart(PDO $pdo, int $userId): void
 
         if (empty($cartGames)) {
             $pdo->rollBack();
-            redirectWithMessage("Store.php", "Je winkelwagen is leeg.", "info");
+            redirectWithMessage("Store.php", "Your cart is empty.", "info");
         }
 
         $orderStatement = $pdo->prepare("INSERT INTO orders (user_id) VALUES (:user_id)");
@@ -40,7 +43,7 @@ function checkoutCart(PDO $pdo, int $userId): void
             $itemStatement->execute([
                 "order_id" => $orderId,
                 "game_id" => (int) $game["id"],
-                "price_at_purchase" => (float) $game["price"],
+                "price_at_purchase" => $game["sale_price"] !== null ? (float) $game["sale_price"] : (float) $game["price"],
             ]);
 
             $libraryStatement->execute([
@@ -53,13 +56,13 @@ function checkoutCart(PDO $pdo, int $userId): void
         $deleteStatement->execute(["user_id" => $userId]);
 
         $pdo->commit();
-        redirectWithMessage("Library.php", "Afrekenen gelukt. Je games staan nu in je bibliotheek.", "success");
+        redirectWithMessage("Library.php", "Checkout complete. Your games are now in your library.", "success");
     } catch (Throwable $exception) {
         if ($pdo->inTransaction()) {
             $pdo->rollBack();
         }
 
-        redirectWithMessage("Store.php", "Afrekenen is mislukt. Probeer het opnieuw.", "danger");
+        redirectWithMessage("Store.php", "Checkout failed. Please try again.", "danger");
     }
 }
 

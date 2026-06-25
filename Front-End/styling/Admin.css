@@ -20,6 +20,85 @@
     gap: 1rem;
 }
 
+.admin-tabs {
+    gap: 0.35rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--app-border);
+}
+
+.admin-tabs .nav-link {
+    border: 1px solid transparent;
+    border-radius: var(--app-radius) var(--app-radius) 0 0;
+    color: var(--app-muted);
+    font-weight: 800;
+}
+
+.admin-tabs .nav-link:hover,
+.admin-tabs .nav-link:focus {
+    border-color: rgba(43, 196, 255, 0.24);
+    color: var(--app-text-strong);
+}
+
+.admin-tabs .nav-link.active {
+    border-color: var(--app-border);
+    border-bottom-color: transparent;
+    background: var(--app-surface-soft);
+    color: var(--app-text-strong);
+}
+
+.admin-tab-content {
+    padding-top: 0.5rem;
+}
+
+.admin-add-game {
+    padding: 1rem;
+}
+
+.admin-section-heading {
+    margin-bottom: 1rem;
+}
+
+.admin-section-heading h2 {
+    color: var(--app-text-strong);
+    font-weight: 800;
+}
+
+.admin-game-form {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.admin-game-form .form-label {
+    color: var(--app-text-soft);
+    font-size: 0.86rem;
+    font-weight: 700;
+}
+
+.admin-control {
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: var(--app-radius);
+    background: var(--app-input-bg);
+    color: var(--app-text-strong);
+}
+
+.admin-control:focus {
+    border-color: rgba(43, 196, 255, 0.82);
+    background: var(--app-input-bg-focus);
+    color: var(--app-text-strong);
+    box-shadow: 0 0 0 0.22rem rgba(43, 196, 255, 0.17);
+}
+
+.admin-form-wide,
+.admin-form-actions {
+    grid-column: 1 / -1;
+}
+
+.admin-form-actions {
+    display: flex;
+    justify-content: flex-end;
+}
+
 .admin-player {
     padding: 1rem;
 }
@@ -81,6 +160,114 @@
     font-size: 0.85rem;
 }
 
+.admin-store-game {
+    display: grid;
+    grid-template-columns: 3.2rem minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem;
+}
+
+.admin-store-game > img {
+    width: 3.2rem;
+    height: 4.8rem;
+    object-fit: cover;
+    border-radius: 6px;
+    background: var(--app-surface);
+}
+
+.admin-store-game-info {
+    display: grid;
+    gap: 0.35rem;
+}
+
+.admin-store-game-info strong,
+.admin-store-game-info span {
+    display: block;
+}
+
+.admin-store-game-info strong {
+    color: var(--app-text-strong);
+}
+
+.admin-store-game-info span {
+    color: var(--app-muted);
+    font-size: 0.85rem;
+}
+
+.admin-game-prices {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.admin-game-prices .has-sale {
+    text-decoration: line-through;
+}
+
+.admin-game-prices strong {
+    color: var(--app-accent-2);
+}
+
+.admin-game-prices em {
+    color: var(--app-accent-3);
+    font-size: 0.82rem;
+    font-style: normal;
+    font-weight: 800;
+}
+
+.admin-status {
+    width: fit-content;
+    padding: 0.2rem 0.45rem;
+    border-radius: var(--app-radius);
+    font-weight: 800;
+}
+
+.admin-status.active {
+    background: rgba(69, 248, 130, 0.12);
+    color: var(--app-accent-2);
+}
+
+.admin-status.disabled {
+    background: rgba(255, 92, 122, 0.12);
+    color: var(--app-danger);
+}
+
+.admin-store-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 0.5rem;
+}
+
+.admin-sale-form {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.admin-sale-form .admin-control {
+    width: 8rem;
+}
+
+.admin-edit-collapse {
+    grid-column: 1 / -1;
+    width: 100%;
+}
+
+.admin-edit-game-form {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+    padding-top: 1rem;
+    margin-top: 0.75rem;
+    border-top: 1px solid var(--app-border);
+}
+
+.admin-edit-game-form .form-label {
+    color: var(--app-text-soft);
+    font-size: 0.86rem;
+    font-weight: 700;
+}
+
 .admin-remove-button {
     border: 1px solid rgba(255, 92, 122, 0.35);
     border-radius: var(--app-radius);
@@ -92,4 +279,23 @@
 .admin-remove-button:focus {
     background: rgba(255, 92, 122, 0.2);
     color: var(--app-danger);
+}
+
+@media (max-width: 767.98px) {
+    .admin-game-form {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-edit-game-form {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-store-game {
+        grid-template-columns: 3.2rem 1fr;
+    }
+
+    .admin-store-actions {
+        grid-column: 1 / -1;
+        justify-content: flex-start;
+    }
 }

@@ -6,13 +6,6 @@
         linear-gradient(135deg, var(--app-bg-deep) 0%, var(--app-bg) 44%, var(--app-surface) 100%);
 }
 
-.signup-nav {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    background: rgba(10, 15, 24, 0.76);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
-}
-
 .signup-stage {
     min-height: calc(100vh - 58px);
     display: flex;

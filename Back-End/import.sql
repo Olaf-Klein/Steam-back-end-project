@@ -21,6 +21,8 @@ CREATE TABLE IF NOT EXISTS games (
     title VARCHAR(120) NOT NULL,
     description TEXT NOT NULL,
     price DECIMAL(6, 2) NOT NULL DEFAULT 0.00,
+    sale_price DECIMAL(6, 2) NULL,
+    is_active BOOLEAN NOT NULL DEFAULT TRUE,
     image VARCHAR(500) NOT NULL,
     genre VARCHAR(80) NOT NULL
 );
@@ -60,8 +62,8 @@ CREATE TABLE order_items (
 );
 
 INSERT INTO users (username, email, password, IsAdmin) VALUES
-('admin', 'admin@example.com', '$2y$10$examplehashedpasswordforadmin', TRUE),
-('player', 'player@example.com', '$2y$10$examplehashedpasswordforplayer', FALSE);
+('admin', 'admin@example.com', '$2y$12$NPdcVa7x9PQ2rjdgr50dxu8PByOWn3O2/EtdpSYmY2jD3FSoq/AqS', TRUE),
+('player', 'player@example.com', '$2y$12$BdmNi30mJaO1AEhhreWApOLhrqelOHpl0DFtqy1YiVe0YbWDiGba6', FALSE);
 
 INSERT INTO games (title, description, price, image, genre) VALUES
 ('Counter-Strike 2', 'Competitive tactical shooter with team-based matches.', 0.00, 'https://cdn.cloudflare.steamstatic.com/steam/apps/730/library_600x900_2x.jpg', 'Shooter'),

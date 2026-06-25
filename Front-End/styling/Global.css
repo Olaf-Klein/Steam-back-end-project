@@ -30,6 +30,129 @@ body {
     color: var(--app-text);
 }
 
+.signup-nav {
+    position: relative;
+    z-index: 3000;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(10, 15, 24, 0.76);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+}
+
+.signup-nav .navbar-collapse,
+.signup-nav .navbar-nav,
+.signup-nav .dropdown {
+    position: relative;
+    z-index: 3001;
+}
+
+.profile-nav-button {
+    border: 0;
+    background: transparent;
+}
+
+.profile-dropdown {
+    z-index: 3010 !important;
+    min-width: 15rem;
+    border: 1px solid var(--app-border);
+    border-radius: var(--app-radius);
+    background:
+        linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.04)),
+        rgba(10, 15, 24, 0.96);
+    box-shadow: 0 16px 34px rgba(0, 0, 0, 0.36);
+}
+
+.profile-dropdown-header {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--app-border);
+}
+
+.profile-dropdown-header strong,
+.profile-dropdown-header span {
+    display: block;
+}
+
+.profile-dropdown-header strong {
+    color: var(--app-text-strong);
+}
+
+.profile-dropdown-header span {
+    color: var(--app-muted);
+    font-size: 0.85rem;
+    overflow-wrap: anywhere;
+}
+
+.profile-dropdown .dropdown-item {
+    color: var(--app-text-soft);
+}
+
+.profile-dropdown .dropdown-item:hover,
+.profile-dropdown .dropdown-item:focus {
+    background: var(--app-surface-hover);
+    color: var(--app-text-strong);
+}
+
+.profile-dropdown .dropdown-divider {
+    border-color: var(--app-border);
+}
+
+.profile-modal .modal-content {
+    color: var(--app-text);
+}
+
+.profile-modal .modal-header,
+.profile-modal .modal-footer {
+    border-color: var(--app-border);
+}
+
+.profile-modal .modal-body {
+    display: grid;
+    grid-template-columns: 4rem 1fr;
+    gap: 1rem;
+    align-items: start;
+}
+
+.profile-modal-avatar {
+    width: 4rem;
+    height: 4rem;
+    display: grid;
+    place-items: center;
+    border-radius: var(--app-radius);
+    background: var(--app-gradient);
+    color: #07101a;
+    font-size: 2rem;
+}
+
+.profile-modal-details {
+    display: grid;
+    gap: 0.75rem;
+    margin: 0;
+}
+
+.profile-modal-details div {
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--app-border);
+}
+
+.profile-modal-details div:last-child {
+    padding-bottom: 0;
+    border-bottom: 0;
+}
+
+.profile-modal-details dt {
+    color: var(--app-muted-dark);
+    font-size: 0.78rem;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.profile-modal-details dd {
+    margin: 0.2rem 0 0;
+    color: var(--app-text-strong);
+    font-weight: 700;
+    overflow-wrap: anywhere;
+}
+
 .app-glass {
     border: 1px solid var(--app-border-strong);
     border-radius: var(--app-radius);
