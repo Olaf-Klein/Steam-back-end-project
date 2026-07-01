@@ -166,7 +166,7 @@
     padding: 1.5rem;
 }
 
-.library-empty > i {
+.library-empty>i {
     color: var(--app-accent);
     font-size: 2rem;
 }
