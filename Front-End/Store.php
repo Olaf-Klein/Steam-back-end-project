@@ -166,6 +166,29 @@ unset($_SESSION["flash_message"], $_SESSION["flash_type"]);
         </div>
     </aside>
 
+    <script>
+        (() => {
+            const navbar = document.querySelector(".signup-nav");
+
+            if (!navbar) {
+                return;
+            }
+
+            const syncCartOffset = () => {
+                document.documentElement.style.setProperty("--cart-sidebar-offset", `${navbar.offsetHeight}px`);
+            };
+
+            syncCartOffset();
+            window.addEventListener("resize", syncCartOffset, { passive: true });
+
+            const navbarCollapse = navbar.querySelector(".navbar-collapse");
+            if (navbarCollapse) {
+                navbarCollapse.addEventListener("shown.bs.collapse", syncCartOffset);
+                navbarCollapse.addEventListener("hidden.bs.collapse", syncCartOffset);
+            }
+        })();
+    </script>
+
 </body>
 
 </html>

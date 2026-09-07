@@ -6,6 +6,10 @@ body {
         var(--app-page-bg);
 }
 
+:root {
+    --cart-sidebar-offset: 4.75rem;
+}
+
 main {
     position: relative;
     z-index: 1;
@@ -32,11 +36,13 @@ main {
 }
 
 .cart-offcanvas {
+    top: var(--cart-sidebar-offset);
     border-left: 1px solid var(--app-border);
     background:
         linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03)),
         rgba(10, 15, 24, 0.96);
     color: var(--app-text);
+    height: calc(100dvh - var(--cart-sidebar-offset));
 }
 
 .cart-offcanvas .offcanvas-header {

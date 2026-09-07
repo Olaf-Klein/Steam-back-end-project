@@ -97,11 +97,11 @@ Na het importeren van `import.sql` zijn deze accounts beschikbaar:
 ```text
 Admin
 Email: admin@example.com
-Wachtwoord: admin123
+Wachtwoord: test123
 
-Speler
+<!-- Speler
 Email: player@example.com
-Wachtwoord: player123
+Wachtwoord: player123 -->
 ```
 
 Je kunt inloggen met e-mailadres of gebruikersnaam.
